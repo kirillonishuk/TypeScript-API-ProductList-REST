@@ -1,5 +1,8 @@
 import * as MongoDB from 'mongodb';
-import * as config from '../config/config.json';
+
+// if (process.env.NODE_ENV !== 'production') {
+//     import * as config from '../config/config.json';
+// }
 
 export const ObjectId = MongoDB.ObjectId;
 
@@ -7,7 +10,8 @@ export class DB {
     private MongoClient = MongoDB.MongoClient;
     private connection;
     private database;
-    private connectUrl: string = `mongodb://${config.mongodb.login}:${config.mongodb.password}@${config.mongodb.adress}:${config.mongodb.db}`;
+    private connectUrl: string = process.env['MONGODB_URI']/* || 
+    `mongodb://${config.mongodb.login}:${config.mongodb.password}@${config.mongodb.adress}:${config.mongodb.db}`*/;
 
     public collectionName: string;
 
@@ -22,9 +26,9 @@ export class DB {
             })
         }
         catch (error) {
-            throw error;
+            console.log(error);
         };
-        this.database = this.connection.db(config.mongodb.name);
+        this.database = this.connection.db(process.env['MONGODB_DBNAME'] /*|| config.mongodb.name*/);
         return this.database;
     };
 
@@ -33,10 +37,14 @@ export class DB {
     }
 
     public closeConnection = () => {
-        this.connection.close();
+        try {
+            this.connection.close();
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     // public createCollection = async (index: boolean[] = null) => {
-        
+
     // }
 };

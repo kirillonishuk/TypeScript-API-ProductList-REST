@@ -1,9 +1,0 @@
-{
-  "mongodb": {
-    "login": "admin",
-    "password": "123456Admin",
-    "adress": "ds237363.mlab.com",
-    "db": "37363/mt-labs-product-list",
-    "name": "mt-labs-product-list"
-  }
-}

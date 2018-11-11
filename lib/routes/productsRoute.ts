@@ -27,7 +27,9 @@ export class ProductsRoutes {
                         res.status(200)
                             .json(data)
                     }, error => {
-                        throw error;
+                        res.status(500)
+                            .json({ message: error.message })
+                        console.log(error);
                     })
             })
             .post((req: IProductRequest, res: Response) => {
