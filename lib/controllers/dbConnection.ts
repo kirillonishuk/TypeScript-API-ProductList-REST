@@ -1,8 +1,6 @@
 import * as MongoDB from 'mongodb';
 
-// if (process.env.NODE_ENV !== 'production') {
-//     import * as config from '../config/config.json';
-// }
+// import * as config from '../config/config.json';
 
 export const ObjectId = MongoDB.ObjectId;
 
@@ -28,7 +26,7 @@ export class DB {
         catch (error) {
             console.log(error);
         };
-        this.database = this.connection.db(process.env['MONGODB_DBNAME'] /*|| config.mongodb.name*/);
+        this.database = this.connection.db(process.env['MONGODB_DBNAME']/* || config.mongodb.name*/);
         return this.database;
     };
 

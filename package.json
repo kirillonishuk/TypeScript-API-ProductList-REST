@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "postinstall": "npm run build",
+    "build-doc": "apidoc -i lib/ -o doc/",
+    "postinstall": "npm run build && npm run build-doc",
     "start": "npm run prod",
     "prod": "node dist/server.js",
     "dev": "nodemon --exec ts-node -- ./lib/server.ts"
@@ -21,5 +22,14 @@
   },
   "bugs": {
     "email": "kirillonishuk@yandex.by"
+  },
+  "apidoc": {
+    "name": "Product List Documentation",
+    "version": "0.1.0",
+    "description": "Documentation for REST API for Product List.",
+    "apidoc": {
+      "title": "Product List Documentation",
+      "url": "https://api-productlist.herokuapp.com/doc"
+    }
   }
 }
