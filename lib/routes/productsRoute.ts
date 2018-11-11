@@ -78,9 +78,8 @@ export class ProductsRoutes {
                     });
             })
             .patch((req: Request, res: Response) => {
-                updateDocumentInCollection('products', req.params.id, req.body)
                 try {
-                    let body = Product.DTOProduct(req.body);                    
+                    let body = Product.DTOProduct(req.body);
                     if (!Object.keys(body).length) throw Error('Body is empty.')
                     updateDocumentInCollection('products', req.params.id, body)
                         .then(data => {
