@@ -17,8 +17,8 @@ class App {
 
     private config(): void {
         this.app.use(express.static(path.join(__dirname, '../doc')));
-        this.app.use(express.json());
-        this.app.use(express.urlencoded({ extended: false }));
+        this.app.use(express.json({ limit: '50mb' }));
+        this.app.use(express.urlencoded({ extended: false, limit: '50mb' }));
 
         this.app.use((req: express.Request, res: express.Response, next: NextFunction) => {
             res.append('Access-Control-Allow-Origin', ['*']);
