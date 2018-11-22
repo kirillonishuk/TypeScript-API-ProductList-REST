@@ -9,7 +9,9 @@
     "postinstall": "npm run build && npm run build-doc",
     "start": "npm run prod",
     "prod": "node dist/server.js",
-    "dev": "nodemon --exec ts-node -- ./lib/server.ts"
+    "dev:drop": "nodemon --exec ts-node -- ./lib/server.ts --drop",
+    "dev:erase": "nodemon --exec ts-node -- ./lib/server.ts --erase",
+    "dev:bootstrap": "nodemon --exec ts-node -- ./lib/server.ts --bootstrap"
   },
   "author": "Kiryl Anishchuk",
   "license": "MIT",

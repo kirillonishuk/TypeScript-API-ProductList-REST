@@ -3,9 +3,44 @@ import {
     ObjectId
 } from './dbConnection';
 
+export const dropDatabase = async () => {
+    let db, collection;
+    const mongoDB = await new DB();
+    try {
+        db = await mongoDB.getConnection();
+        collection = await db.dropDatabase();
+        console.log('Database droped.');
+    }
+    catch (error) {
+        throw error;
+    }
+    finally {
+        mongoDB.closeConnection();
+    }
+    return collection;
+}
+
+export const createCollection = async (collectionName: string, index: any) => {
+    let db, collection;
+    const mongoDB = await new DB();
+    try {
+        db = await mongoDB.getConnection();
+        collection = await db.createCollection(collectionName);
+        collection.createIndex(index.field, index.options);
+        console.log(`Collection ${collectionName} created.`)
+    }
+    catch (error) {
+        throw error;
+    }
+    finally {
+        mongoDB.closeConnection();
+    }
+    return collection;
+}
+
 export const getCollection = async (collectionName: string) => {
     let db, collection;
-    const mongoDB = await new DB(collectionName);
+    const mongoDB = await new DB();
     try {
         db = await mongoDB.getConnection();
         collection = await db.collection(collectionName)
@@ -29,7 +64,7 @@ export const addToCollection = async (collectionName: string, insertData: {
     description: string | null
 }) => {
     let db, collection;
-    const mongoDB = await new DB(collectionName);
+    const mongoDB = await new DB();
     try {
         db = await mongoDB.getConnection();
         collection = await db.collection(collectionName)
@@ -47,7 +82,7 @@ export const addToCollection = async (collectionName: string, insertData: {
 export const deleteFromCollection = async (collectionName: string, _id: string) => {
     if (_id.length === 24) _id = new ObjectId(_id);
     let db, collection;
-    const mongoDB = await new DB(collectionName);
+    const mongoDB = await new DB();
     try {
         db = await mongoDB.getConnection();
         collection = await db.collection(collectionName)
@@ -65,7 +100,7 @@ export const deleteFromCollection = async (collectionName: string, _id: string) 
 export const getOneDocumentFromCollection = async (collectionName: string, _id: string) => {
     if (_id.length === 24) _id = new ObjectId(_id);
     let db, collection;
-    const mongoDB = await new DB(collectionName);
+    const mongoDB = await new DB();
     try {
         db = await mongoDB.getConnection();
         collection = await db.collection(collectionName)
@@ -89,7 +124,7 @@ export const updateDocumentInCollection = async (collectionName: string, _id: st
 }) => {
     if (_id.length === 24) _id = new ObjectId(_id);
     let db, collection;
-    const mongoDB = await new DB(collectionName);
+    const mongoDB = await new DB();
     try {
         db = await mongoDB.getConnection();
         collection = await db.collection(collectionName)
