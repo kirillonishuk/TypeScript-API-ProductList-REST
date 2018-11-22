@@ -26,7 +26,7 @@ export class DB {
         catch (error) {
             console.log(error);
         };
-        this.database = this.connection.db(process.env['MONGODB_DBNAME']/* || config.mongodb.name)*/;
+        this.database = this.connection.db(process.env['MONGODB_DBNAME']/* || config.mongodb.name*/);
         return this.database;
     };
 
